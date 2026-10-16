@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0c1410">
+<title>大头麻将 · 局域网四人联网</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='14' y='8' width='72' height='84' rx='12' fill='%23f6efdd'/%3E%3Ctext x='50' y='66' font-size='52' text-anchor='middle' fill='%23b03a2e' font-family='serif' font-weight='bold'%3E大%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ══════════ 首页 ══════════ -->
+<section id="view-home" class="view">
+  <div class="home-bg">
+    <div class="float-tile ft-1"></div><div class="float-tile ft-2"></div>
+    <div class="float-tile ft-3"></div><div class="float-tile ft-4"></div>
+  </div>
+  <div class="home-card">
+    <div class="home-logo">
+      <div class="logo-tile">大</div>
+      <h1 class="serif">大头麻将</h1>
+    </div>
+    <p class="home-sub">大头麻将 · 局域网四人实时对局 · 吃碰杠胡</p>
+
+    <div class="home-form">
+      <label class="field-label">你的昵称</label>
+      <input id="inp-name" maxlength="12" placeholder="输入昵称，最多 12 字" autocomplete="off">
+      <div class="home-actions">
+        <button id="btn-create" class="btn btn-gold btn-lg">🀄 创建房间</button>
+        <div class="join-row">
+          <input id="inp-code" maxlength="4" inputmode="numeric" placeholder="房号">
+          <button id="btn-join" class="btn btn-ghost">加入房间</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-steps">
+      <div class="step"><i>①</i>输入昵称</div>
+      <div class="step"><i>②</i>创建房间</div>
+      <div class="step"><i>③</i>分享房号</div>
+      <div class="step"><i>④</i>四人开战</div>
+    </div>
+
+    <div class="home-links">
+      <button id="btn-help-home" class="link">玩法与规则说明</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 大厅 ══════════ -->
+<section id="view-lobby" class="view hidden">
+  <div class="lobby-card">
+    <div class="lobby-head">
+      <button id="btn-leave-lobby" class="btn btn-ghost btn-sm">← 离开</button>
+      <div class="room-code-box">
+        <span class="rc-label">房间号</span>
+        <span id="lobby-code" class="rc-value serif">----</span>
+        <button id="btn-copy-link" class="btn btn-sm btn-outline">复制邀请链接</button>
+      </div>
+      <div class="lobby-roundness">先凑满 4 人即可开局，空位可用机器人补齐</div>
+    </div>
+    <div id="lobby-seats" class="lobby-seats"></div>
+    <div class="lobby-foot">
+      <button id="btn-addbot" class="btn btn-outline">🤖 添加机器人</button>
+      <button id="btn-start" class="btn btn-gold btn-lg">开 始 对 局</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 对局 ══════════ -->
+<section id="view-game" class="view hidden">
+  <header id="topbar">
+    <div class="tb-left">
+      <button id="btn-exit" class="btn btn-ghost btn-sm">退出</button>
+      <span class="tb-chip" id="tb-code">房号 ----</span>
+    </div>
+    <div class="tb-mid" id="tb-mid"></div>
+    <div class="tb-right">
+      <button id="btn-sound" class="icon-btn" title="音效开关">🔊</button>
+      <button id="btn-help" class="icon-btn" title="玩法说明">❔</button>
+    </div>
+  </header>
+
+  <div id="table-wrap">
+    <div class="table-frame">
+      <div class="felt">
+        <div class="felt-mark serif">大</div>
+
+        <!-- 三家对手 -->
+        <div class="opp opp-top" id="opp-2"></div>
+        <div class="opp opp-left" id="opp-3"></div>
+        <div class="opp opp-right" id="opp-1"></div>
+
+        <!-- 中央信息 -->
+        <div id="center-hud">
+          <div id="hud-wall">--</div>
+          <div id="hud-turn">…</div>
+        </div>
+
+        <!-- 四方牌河 -->
+        <div class="river rv-top" id="river-2"></div>
+        <div class="river rv-left" id="river-3"></div>
+        <div class="river rv-right" id="river-1"></div>
+        <div class="river rv-bottom" id="river-0"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="my-area">
+    <div id="action-bar"></div>
+    <div id="hand-row">
+      <div id="my-melds"></div>
+      <div id="my-hand"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 弹层 / 提示 -->
+<div id="modal-root" class="hidden"></div>
+<div id="toast-root"></div>
+<div id="conn-banner" class="hidden">
+  <div class="conn-card">
+    <div class="conn-title">与房间的连接已断开</div>
+    <div class="conn-sub">牌局仍在继续，你可以尝试重新连接（断线期间由机器人托管）</div>
+    <button id="btn-reconnect" class="btn btn-gold">重新连接</button>
+    <button id="btn-back-home" class="btn btn-ghost">返回首页</button>
+  </div>
+</div>
+
+<script src="client.js"></script>
+</body>
+</html>

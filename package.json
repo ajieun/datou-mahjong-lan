@@ -1,0 +1,22 @@
+{
+  "name": "datou-mahjong-lan",
+  "version": "1.0.0",
+  "description": "大头麻将 · 局域网联机四人麻将 Web 游戏（零依赖，node server.js 直接运行）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/sim.js"
+  },
+  "keywords": [
+    "mahjong",
+    "麻将",
+    "lan-game",
+    "websocket",
+    "zero-dependency",
+    "nodejs"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
